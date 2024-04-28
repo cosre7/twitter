@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import db from '../../../lib/server/db';
 import { getIronSession } from 'iron-session';
 import { SessionData, sessionOptions } from '../../../lib/server/session';
 

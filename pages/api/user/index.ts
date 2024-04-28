@@ -8,6 +8,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('session', session.user);
 
   if (!session.user) {
+    console.log('session 없음');
     return res.status(400).json({
       ok: false
     });
@@ -18,11 +19,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   });
   if (session.user !== user?.id) {
+    console.log('아이디 다름');
     return res.status(400).json({
       ok: false
     });
   }
 
+  console.log('로그인 성공');
   return res.status(200).json({
     ok: true
   });

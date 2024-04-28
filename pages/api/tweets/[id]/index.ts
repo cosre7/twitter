@@ -5,6 +5,7 @@ import { SessionData, sessionOptions } from '../../../../lib/server/session';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const session = await getIronSession<SessionData>(req, res, sessionOptions);
+  if (!req.query.id) return;
   const tweet = await db.tweet.findUnique({
     where: {
       id: +req.query.id

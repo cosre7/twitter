@@ -24,14 +24,15 @@ interface TweetResponse {
 
 export default function Home() {
   const router = useRouter();
-  const { data: isLoggedIn } = useSWR<ResultType>('/api/user');
+  // const { data: isLoggedIn } = useSWR<ResultType>('/api/user');
   const { data } = useSWR<TweetResponse>('/api/tweets');
 
-  useEffect(() => {
-    if (isLoggedIn && !isLoggedIn.ok) {
-      router.replace('/log-in');
-    }
-  }, [isLoggedIn, router]);
+  // console.log('isLoggedIn', isLoggedIn);
+  // useEffect(() => {
+  //   if (isLoggedIn?.ok === false) {
+  //     router.replace('/log-in');
+  //   }
+  // }, [isLoggedIn, router]);
 
   const dateToString = (date: Date): string => {
     const start = new Date(date);
@@ -55,7 +56,7 @@ export default function Home() {
     <>
       <SideBar />
       <div>
-        <Link href={'/tweets/upload'}>
+        <Link href={'/tweets/upload'} legacyBehavior>
           <a className='fixed bottom-5 right-5 flex justify-center items-center rounded-full h-[60px] w-[60px] bg-purple-500 text-3xl text-purple-300 font-bold'>
             +
           </a>
@@ -64,7 +65,7 @@ export default function Home() {
       <div className='px-10 pt-5 flex flex-col gap-5'>
         {data?.tweets?.map((tweet) => (
           <div key={tweet.id} className='border border-purple-500 rounded-2xl px-5 py-5 relative'>
-            <Link href={`/tweets/${tweet.id}`}>
+            <Link href={`/tweets/${tweet.id}`} legacyBehavior>
               <a>
                 <div className='flex items-center gap-5'>
                   <span className='name'>{tweet.user.name}</span>

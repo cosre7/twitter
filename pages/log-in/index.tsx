@@ -17,16 +17,16 @@ export default function Login() {
     formState: { errors }
   } = useForm<FormData>();
   const [logIn, { loading, data }] = useMutation('/api/user/log-in');
-  const onValid = (data: any) => {
+  const onValid = (validForm: FormData) => {
     if (loading) return;
-    logIn(data);
+    logIn(validForm);
   };
+  console.log(data, loading);
   useEffect(() => {
     if (data?.ok) {
-      router.push('/');
+      router.replace('/');
     }
   }, [data, router]);
-  console.log(data);
   return (
     <div className='flex flex-col items-center h-screen w-screen mt-32'>
       <h1 className='text-[70px] login-shadow text-purple-300'>Login</h1>
@@ -62,7 +62,7 @@ export default function Login() {
         )}
         {}
         <div className='flex justify-between px-1 py-5 w-full items-center gap-10'>
-          <Link href={'/create-account'}>
+          <Link href={'/create-account'} legacyBehavior>
             <a className='bg-purple-200 text-purple-700 font-semibold py-3 rounded-lg w-full flex items-center justify-center'>
               Create Account
             </a>
