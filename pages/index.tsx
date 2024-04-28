@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Tweet, User } from '@prisma/client';
 import SideBar from '../components/sideBar';
+import { spawn } from 'child_process';
 
 interface ResultType {
   ok: boolean;
@@ -62,13 +63,11 @@ export default function Home() {
       </div>
       <div className='px-10 pt-5 flex flex-col gap-5'>
         {data?.tweets?.map((tweet) => (
-          <div key={tweet.id} className='border border-purple-500 rounded-2xl px-5 py-5'>
+          <div key={tweet.id} className='border border-purple-500 rounded-2xl px-5 py-5 relative'>
             <Link href={`/tweets/${tweet.id}`}>
               <a>
                 <div className='flex items-center gap-5'>
-                  <span className='text-purple-800 text-lg font-bold bg-purple-400 px-3 py-2 rounded-full'>
-                    {tweet.user.name}
-                  </span>
+                  <span className='name'>{tweet.user.name}</span>
                   <span className='text-purple-700 font-bold text-base'>{dateToString(tweet.createdAt)}</span>
                 </div>
                 <div className='pt-3 px-3 text-lg text-purple-800 font-medium'>
@@ -76,6 +75,7 @@ export default function Home() {
                 </div>
               </a>
             </Link>
+            <span className='absolute right-5 top-5'>🤍 {tweet._count.favs}</span>
           </div>
         ))}
       </div>

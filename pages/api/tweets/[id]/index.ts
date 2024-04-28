@@ -15,6 +15,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           id: true,
           name: true
         }
+      },
+      _count: {
+        select: {
+          favs: true
+        }
       }
     }
   });
