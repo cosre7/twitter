@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
 import useSWR from 'swr';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Tweet, User } from '@prisma/client';
 import SideBar from '../components/sideBar';
-import { spawn } from 'child_process';
-
-interface ResultType {
-  ok: boolean;
-}
 
 interface TweetWithCount extends Tweet {
   _count: {
@@ -23,16 +16,7 @@ interface TweetResponse {
 }
 
 export default function Home() {
-  const router = useRouter();
-  // const { data: isLoggedIn } = useSWR<ResultType>('/api/user');
   const { data } = useSWR<TweetResponse>('/api/tweets');
-
-  // console.log('isLoggedIn', isLoggedIn);
-  // useEffect(() => {
-  //   if (isLoggedIn?.ok === false) {
-  //     router.replace('/log-in');
-  //   }
-  // }, [isLoggedIn, router]);
 
   const dateToString = (date: Date): string => {
     const start = new Date(date);

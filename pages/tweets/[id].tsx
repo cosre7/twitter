@@ -41,7 +41,8 @@ export default function TweetDetail() {
   };
   console.log(data);
 
-  const dateToString = (date: Date): string => {
+  const dateToString = (date: Date | undefined): string => {
+    if (!date) return '';
     const start = new Date(date);
     const end = new Date();
 

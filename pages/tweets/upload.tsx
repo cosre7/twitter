@@ -10,7 +10,7 @@ interface UploadTweetForm {
 
 export default function Upload() {
   const { register, handleSubmit } = useForm<UploadTweetForm>();
-  const [uploadTweet, { loading, data }] = useMutation('/api/tweets');
+  const [uploadTweet, { data }] = useMutation('/api/tweets');
   const router = useRouter();
   const onValid = async (data: UploadTweetForm) => {
     uploadTweet(data);
