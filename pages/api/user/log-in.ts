@@ -14,7 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   });
   if (session.user === user?.id) {
     return res.status(200).json({
-      isLoggedIn: true
+      ok: true
     });
   }
   if (!user) {
